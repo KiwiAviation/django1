@@ -67,7 +67,10 @@ class tSheet():
     client = gspread.authorize(creds)
     # sheet to access
     sheet = client.open('Tent_db').sheet1
- 
+
+    ## TODO create helper function allow col inputs to be name of col and row inputs to be ids (get_cell('ta1', 'condition)) 
+    ## TODO implement try / except to catch errots
+
     # search methods
     def get_cell(row, col):
         '''returns the value of a cell with the given position'''
