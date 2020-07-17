@@ -68,15 +68,30 @@ class tSheet():
     # sheet to access
     sheet = client.open('Tent_db').sheet1
 
-    ## TODO create helper function allow col inputs to be name of col and row inputs to be ids (get_cell('ta1', 'condition)) 
-    ## TODO implement try / except to catch errots
+    # helper function that allows col inputs to be name of col and row inputs to be ids (get_cell('ta1', 'condition')) 
+    def col_index(col):
+        '''converts input col name to a num'''
+        for i, val in enumerate(tSheet.sheet.row_values(1)):
+            if val == col:
+                return i + 1
+        return col
+
+    def row_index(row):
+        '''converts input id to a num'''
+        for i, val in enumerate(tSheet.sheet.col_values(1)):
+            if val == row:
+                return i + 1
+        return row
 
     # search methods
     def get_cell(row, col):
+        row = tSheet.row_index(row)
+        col = tSheet.col_index(col)
         '''returns the value of a cell with the given position'''
         return tSheet.sheet.cell(row, col).value
  
     def get_row(row):
+        row = tSheet.row_index(row)
         '''returns a list with all values in the given row'''
         return tSheet.sheet.row_values(row)
  
@@ -95,11 +110,14 @@ class tSheet():
  
     # edit methods
     def update_cell(row, col, new):
+        row = tSheet.row_index(row)
+        col = tSheet.col_index(col)
         '''updates a cell at the given position'''
         tSheet.sheet.update_cell(row, col, new)
         return
  
     def insert_row(new, row):
+        row = tSheet.row_index(row)
         '''inserts a new row at the position given'''
         tSheet.sheet.insert_row(new, row)
         return
@@ -117,3 +135,8 @@ class tSheet():
         tSheet.sheet.delete_rows(cell.row)
         tSheet.sheet.insert_row(new, cell.row)
         return
+
+result1 = tSheet.get_cell(3, 'condition')
+# result2 = tSheet.get_row(3)
+
+print(result1)
