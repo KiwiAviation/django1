@@ -1,3 +1,6 @@
+# visual studio code
+.vscode/
+
 #google drive api
 client_secret.json
 
