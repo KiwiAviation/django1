@@ -135,8 +135,4 @@ class tSheet():
         tSheet.sheet.delete_rows(cell.row)
         tSheet.sheet.insert_row(new, cell.row)
         return
-
-result1 = tSheet.get_cell(3, 'condition')
-# result2 = tSheet.get_row(3)
-
-print(result1)
+ 
