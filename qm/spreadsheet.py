@@ -30,14 +30,14 @@ class Sheet():
  
     # search methods
     def get_cell(self, row, col):
+        '''returns the value of a cell with the given position'''
         row = self.row_index(row)
         col = self.col_index(col)
-        '''returns the value of a cell with the given position'''
         return self.sheet.cell(row, col).value
  
     def get_row(self, row):
-        row = self.row_index(row)
         '''returns a list with all values in the given row'''
+        row = self.row_index(row)
         return self.sheet.row_values(row)
  
     def get_all(self):
@@ -55,15 +55,15 @@ class Sheet():
  
     # edit methods
     def update_cell(self, row, col, new):
+        '''updates a cell at the given position'''
         row = self.row_index(row)
         col = self.col_index(col)
-        '''updates a cell at the given position'''
         self.sheet.update_cell(row, col, new)
         return
  
     def insert_row(self, new, row):
-        row = self.row_index(row)
         '''inserts a new row at the position given'''
+        row = self.row_index(row)
         self.sheet.insert_row(new, row)
         return
  
@@ -80,6 +80,57 @@ class Sheet():
         self.sheet.delete_rows(cell.row)
         self.sheet.insert_row(new, cell.row)
         return
+
+    # execute function
+    def execute(self, action, **kwargs):
+        '''executes a method'''
+        value = None
+        row = None
+        col = None
+        new = None
+
+        for key, val in kwargs.items():
+            if key == 'value':
+                value = val
+            elif key == 'row':
+                row = val
+            elif key == 'col':
+                col = val
+            elif key == 'new':
+                new = val
+
+        if action == 'get_cell':
+            return self.get_cell(row, col)
+
+        elif action == 'get_row':
+            return self.get_row(row)
+
+        elif action == 'get_all':
+            return self.get_all()
+
+        elif action == 'find_cell':
+            return self.find_cell(value)
+
+        elif action == 'find_row':
+            return self.find_row(value)
+
+        elif action == 'update_cell':
+            self.update_cell(row, col, new)
+            return
+
+        elif action == 'insert_row':
+            self.insert_row(new, row)
+            return
+
+        elif action == 'update_cell_by_val':
+            self.update_cell_by_val(value, new)
+            return
+
+        elif action == 'update_row_by_val':
+            self.update_row_by_val(value, new)
+            return
+
+
 
 mSheet = Sheet('Master_qm')
 tSheet = Sheet('Tent_db')
