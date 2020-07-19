@@ -8,7 +8,7 @@ class Sheet():
             # vars for access
         scope = ['https://spreadsheets.google.com/feeds',
                 'https://www.googleapis.com/auth/drive']
-        creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_name("qm/client_secret.json", scope)
         client = gspread.authorize(creds)
         # sheet to access
         self.sheet = client.open(open).sheet1
@@ -19,14 +19,14 @@ class Sheet():
         for i, val in enumerate(self.sheet.row_values(1)):
             if val == col:
                 return i + 1
-        return col
+        return int(col)
  
     def row_index(self, row):
         '''converts input id to a num'''
         for i, val in enumerate(self.sheet.col_values(1)):
             if val == row:
                 return i + 1
-        return row
+        return int(row)
  
     # search methods
     def get_cell(self, row, col):
@@ -58,7 +58,7 @@ class Sheet():
         '''updates a cell at the given position'''
         row = self.row_index(row)
         col = self.col_index(col)
-        self.sheet.update_cell(row, col, new)
+        self.sheet.update_cell(row, col, new[0])
         return
  
     def insert_row(self, new, row):
@@ -71,7 +71,7 @@ class Sheet():
         '''finds all cells with the given search value and updates each cell with the new value'''
         cells = self.sheet.findall(value)
         for cell in cells:
-            self.sheet.update_cell(cell.row, cell.col, new)
+            self.sheet.update_cell(cell.row, cell.col, new[0])
         return
  
     def update_row_by_val(self, value, new):
@@ -129,8 +129,3 @@ class Sheet():
         elif action == 'update_row_by_val':
             self.update_row_by_val(value, new)
             return
-
-
-
-mSheet = Sheet('Master_qm')
-tSheet = Sheet('Tent_db')
