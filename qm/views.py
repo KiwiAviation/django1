@@ -14,8 +14,6 @@ def qm(request):
             col = form.cleaned_data.get('col')
             new = form.cleaned_data.get('new').split(', ')
 
-            print(sheet, action, value, row, col, new)
-
             mSheet = Sheet('Master_qm')
             tSheet = Sheet('Tent_db')
 
@@ -23,12 +21,15 @@ def qm(request):
                 try:
                     mSheet.execute(action=action, value=value, row=row, col=col, new=new)
                 except:
-                    return render(request, 'qm/fail.html', {'title': 'Submit', 'form': form})
+                    print('fail')
+                    return render(request, 'qm/fail.html')
             elif sheet == 'Tent_db':
+                # x = tSheet.execute(action=action, value=value, row=row, col=col, new=new)
+                # print(x)
                 try:
                     tSheet.execute(action=action, value=value, row=row, col=col, new=new)
                 except:
-                    return render(request, 'qm/fail.html', {'title': 'Submit', 'form': form})
+                    return render(request, 'qm/fail.html')
 
             return render(request, 'qm/spreadsheet.html', {'title': 'Submit', 'form': form})
     else:

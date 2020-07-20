@@ -116,11 +116,11 @@ class Sheet():
 
         elif action == 'update_cell':
             self.update_cell(row, col, new)
-            return
+            return self.get_cell(row, col)
 
         elif action == 'insert_row':
             self.insert_row(new, row)
-            return
+            return self.get_row(row)
 
         elif action == 'update_cell_by_val':
             self.update_cell_by_val(value, new)

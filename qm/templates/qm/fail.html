@@ -1,3 +1,5 @@
+{% extends "qm/quartermaster.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,8 @@
     <title>Error occured</title>
 </head>
 <body>
-    
+    <h1>An Error Occured</h1>
+    <a class="nav-item nav-link" href="{% url 'qm-qm' %}">Go back</a>
 </body>
 </html>
+{% endblock content %}
