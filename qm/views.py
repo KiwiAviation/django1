@@ -17,21 +17,36 @@ def qm(request):
             mSheet = Sheet('Master_qm')
             tSheet = Sheet('Tent_db')
 
+            row_list = []
+
             if sheet == 'Master_qm':
                 try:
                     mSheet.execute(action=action, value=value, row=row, col=col, new=new)
+                    row_list = tSheet.get_row(row)
                 except:
-                    print('fail')
                     return render(request, 'qm/fail.html')
             elif sheet == 'Tent_db':
-                # x = tSheet.execute(action=action, value=value, row=row, col=col, new=new)
-                # print(x)
                 try:
-                    tSheet.execute(action=action, value=value, row=row, col=col, new=new)
+                    result = tSheet.execute(action=action, value=value, row=row, col=col, new=new)
+                    row_list = tSheet.get_row(row)
+                    sheet_all = tSheet.get_all()
+                    while len(row_list) < 6:
+                        row_list.append('')
                 except:
                     return render(request, 'qm/fail.html')
 
-            return render(request, 'qm/spreadsheet.html', {'title': 'Submit', 'form': form})
+            context = {
+                    'result': result,
+                    'sheet': sheet,
+                    'action': action,
+                    'row': row,
+                    'col': col,
+                    'new': new,
+                    'value': value,
+                    'row_list': row_list,
+                    'sheet_all': sheet_all
+                    }
+            return render(request, 'qm/results.html', context)
     else:
         form = spreadForm()
         return render(request, 'qm/spreadsheet.html', {'title': 'Submit', 'form': form})

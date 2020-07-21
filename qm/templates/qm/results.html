@@ -1,0 +1,80 @@
+{% extends "qm/quartermaster.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    table, th, td {
+        border: 1px solid gray;
+        border-collapse: collapse;
+        }
+    th, td {
+        padding: 15px;
+        text-align: left;
+        }
+    #result {
+        color: yellow;
+    }
+    #result_row {
+        background-color: #43e07242;
+    }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <div>    
+        <h3>Search values:</h3>
+        <p class="text-muted">sheet: {{sheet}}</p>
+        <p class="text-muted">action: {{action}}</p>
+        <p class="text-muted">row: {{row}}</p>
+        <p class="text-muted">col: {{col}}</p>
+        <p class="text-muted">new value: {{new}}</p>
+        <p class="text-muted">search value: {{value}}</p>
+    </div>
+    <h3>Result:</h3><h3 id="result">{{ result }}</h3>
+    <br>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>type</th>
+            <th>condition</th>
+            <th>patrol</th>
+            <th>staus</th>
+            <th>notes</th>
+        </tr>
+        <tr>
+            {% for val in row_list %}
+                {% if val == result %}
+                    <td id="result">{{ val }}</td>
+                {% else %}
+                    <td>{{ val }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <h3>Full Sheet:</h3>
+    <table>
+        {% for cur_row in sheet_all %}
+        {% if result in cur_row %}
+            <tr id="result_row">
+        {% else %}
+            <tr>
+        {% endif %}
+            {% for val in cur_row %}
+                {% if val == result %}
+                    <td id="result">{{ val }}</td>
+                {% else %}
+                    <td>{{ val }}</td>
+                {% endif %}
+            {% endfor %}
+            </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}
