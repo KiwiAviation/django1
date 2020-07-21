@@ -9,10 +9,10 @@ def qm(request):
             sheet = form.cleaned_data.get('sheet')
 
             action = form.cleaned_data.get('action')
-            value = form.cleaned_data.get('search_value')
-            row = form.cleaned_data.get('row')
-            col = form.cleaned_data.get('col')
-            new = form.cleaned_data.get('new').split(', ')
+            value = None # disabling for now, might remove completely
+            row = form.cleaned_data.get('Item')
+            col = form.cleaned_data.get('Attribute')
+            new = form.cleaned_data.get('Value').split(', ')
 
             mSheet = Sheet('Master_qm')
             tSheet = Sheet('Tent_db')

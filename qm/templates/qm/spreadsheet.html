@@ -6,7 +6,40 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Spreadsheet</legend>
-                {{ form.as_p }}
+                <p><label for="id_sheet_0">Sheet:</label> <ul id="id_sheet">
+    <li><label for="id_sheet_0"><input type="radio" name="sheet" value="Master_qm" required id="id_sheet_0">
+        Master</label>
+
+    </li>
+        <li><label for="id_sheet_1"><input type="radio" name="sheet" value="Tent_db" required id="id_sheet_1">
+        Tent</label>
+
+    </li>
+    </ul></p>
+    <p><label for="id_action_0">Action:</label> <ul id="id_action">
+        <li><label for="id_action_0"><input type="radio" name="action" value="get_row" required id="id_action_0">
+        Search for item</label>
+
+    </li>
+        <li><label for="id_action_1"><input type="radio" name="action" value="update_cell" required id="id_action_1">
+        Change item&#x27;s attributes</label>
+
+    </li>
+        <li><label for="id_action_2"><input type="radio" name="action" value="insert_row" required id="id_action_2">
+        New item</label>
+
+    </li>
+    </ul></p>
+    <br>
+    <p class="article-content"><label for="id_Item">Item ID:</label> <input type="text" name="Item" required id="id_Item"></p>
+    <p class="text-muted">Item to search for or change (ta1, ta2, etc.)</p>
+    <br>
+    <p><label for="id_Attribute">Attribute:</label> <input type="text" name="Attribute" required id="id_Attribute"></p>
+    <p class="text-muted">The attribute to search for or change (id, type, status, patrol, condition, notes)</p>
+    <br>
+    <p><label for="id_Value"> New Value:</label> <input type="text" name="Value" required id="id_Value"></p>
+    <p class="text-muted">The new value to insert or change to. If inserting new item seperate attributes with commas.</p>
+    <br>
             </fieldset>
             <div>
                 <button class="btn btn-outline-info" type="submit">Submit</button>
