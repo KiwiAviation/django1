@@ -21,10 +21,17 @@ def qm(request):
 
             if sheet == 'Master_qm':
                 try:
-                    mSheet.execute(action=action, value=value, row=row, col=col, new=new)
-                    row_list = tSheet.get_row(row)
-                except:
-                    return render(request, 'qm/fail.html')
+                    result = mSheet.execute(action=action, value=value, row=row, col=col, new=new)
+                    row_list = mSheet.get_row(row)
+                    sheet_all = mSheet.get_all()
+                    while len(row_list) < 6:
+                        row_list.append('')
+                except ValueError as exc:
+                    error_context = {'Error_type': 'ValueError', 'Error': exc}
+                    return render(request, 'qm/fail.html', error_context)
+                except Exception as exc:
+                    error_context = {'Error_type': 'Unexpected Error', 'Error': exc}
+                    return render(request, 'qm/fail.html', error_context)
             elif sheet == 'Tent_db':
                 try:
                     result = tSheet.execute(action=action, value=value, row=row, col=col, new=new)

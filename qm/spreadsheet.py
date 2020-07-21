@@ -19,14 +19,20 @@ class Sheet():
         for i, val in enumerate(self.sheet.row_values(1)):
             if val == col:
                 return i + 1
-        return int(col)
+        try:
+            return int(col)
+        except ValueError:
+            raise ValueError(f'The col \'{col}\' could not be found in the sheet')
  
     def row_index(self, row):
         '''converts input id to a num'''
         for i, val in enumerate(self.sheet.col_values(1)):
             if val == row:
                 return i + 1
-        return int(row)
+        try: 
+            return int(row)
+        except ValueError:
+            raise ValueError(f'The row \'{row}\' could not be found in the sheet')
  
     # search methods
     def get_cell(self, row, col):
