@@ -93,3 +93,7 @@ a.article-title:hover {
 a.mr-2 {
   color: #81C784;
 }
+
+.hidden {
+  visibility: hidden;
+}

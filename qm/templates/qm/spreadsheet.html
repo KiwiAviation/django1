@@ -1,5 +1,10 @@
 {% extends "qm/quartermaster.html" %}
 {% block content %}
+<style>
+    .hidden {
+        visibility: hidden;
+    }
+</style>
 <h1>Quartermaster Page</h1>
 <div>
     <form method="POST">
@@ -38,22 +43,46 @@
             </ul>
             </p>
             <br>
-            <p class="article-content"><label for="id_Item">Item ID:</label> <input type="text" name="Item" required
+            <div class= "item hidden">
+                <p><label for="id_Item">Item ID:</label> <input class="action" type="text" name="Item" 
                     id="id_Item"></p>
-            <p class="text-muted">Item to search for or change (ta1, ta2, etc.)</p>
-            <br>
-            <p><label for="id_Attribute">Attribute:</label> <input type="text" name="Attribute" required
+                <p class="text-muted">Item to search for or change (ta1, ta2, etc.)</p>
+                <br>
+            </div>
+            <div class = "attribute hidden">
+                <p><label for="id_Attribute">Attribute:</label> <input class="action" type="text" name="Attribute" 
                     id="id_Attribute"></p>
-            <p class="text-muted">The attribute to search for or change (id, type, status, patrol, condition, notes)</p>
-            <br>
-            <p><label for="id_Value"> New Value:</label> <input type="text" name="Value" required id="id_Value"></p>
-            <p class="text-muted">The new value to insert or change to. If inserting new item seperate attributes with
-                commas.</p>
-            <br>
+                <p class="text-muted">The attribute to search for or change (id, type, status, patrol, condition, notes)</p>
+                <br>
+            </div>
+            <div class = "value hidden">
+                <p><label for="id_Value"> New Value:</label> <input class="action" type="text" name="Value" id="id_Value"></p>
+                <p class="text-muted">The new value to insert or change to. If inserting new item seperate attributes with
+                    commas.</p>
+                <br>
+            </div>
         </fieldset>
         <div>
             <button class="btn btn-outline-info" type="submit">Submit</button>
         </div>
     </form>
+    <script>
+        $('#id_action input').on('change', function() {
+            let selectedAction = $('input[name=action]:checked', '#id_action').val(); 
+            if (selectedAction == 'get_row') {
+                $('.item').removeClass('hidden');
+                $('.attribute').addClass('hidden');
+                $('.value').addClass('hidden');
+            } else if (selectedAction == 'update_cell') {
+                $('.item').removeClass('hidden');
+                $('.attribute').removeClass('hidden');
+                $('.value').removeClass('hidden');
+            } else if (selectedAction == 'insert_row') {
+                $('.item').removeClass('hidden');
+                $('.attribute').addClass('hidden');
+                $('.value').removeClass('hidden');
+            }
+        });
+    </script>
 </div>
 {% endblock content %}
