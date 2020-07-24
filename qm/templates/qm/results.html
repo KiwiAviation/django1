@@ -44,9 +44,13 @@
             <th>staus</th>
             <th>notes</th>
         </tr>
+    {% if result == row_list %}
+        <tr id="result_row">
+    {% else %}
         <tr>
+    {% endif %}
             {% for val in row_list %}
-                {% if val == result %}
+                {% if val == result1 %}
                     <td id="result">{{ val }}</td>
                 {% else %}
                     <td>{{ val }}</td>
@@ -69,6 +73,15 @@
                         <td>{{ val }}</td>
                     {% endif %}
                 {% endfor %}
+        {% elif result1 == cur_row %}
+        <tr id="result_row">
+            {% for val in cur_row %}
+                {% if val == result %}
+                    <td id="result">{{ val }}</td>
+                {% else %}
+                    <td>{{ val }}</td>
+                {% endif %}
+            {% endfor %}
         {% else %}
             <tr>
                 {% for val in cur_row %}
@@ -78,7 +91,7 @@
             </tr>
     {% endfor %}
     </table>
-    <a class="nav-item nav-link" href="{% url 'qm-qm' %}">back</a>
+    <a class="nav-item" href="{% url 'qm-qm' %}">back</a>
 </body>
 </html>
 {% endblock content %}

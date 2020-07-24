@@ -26,6 +26,10 @@ def qm(request):
                     sheet_all = mSheet.get_all()
                     while len(row_list) < 6:
                         row_list.append('')
+                    result1 = result
+                    while len(result1) < 6:
+                        result1.append('')
+
                 except ValueError as exc:
                     error_context = {'Error_type': 'ValueError', 'Error': exc}
                     return render(request, 'qm/fail.html', error_context)
@@ -39,11 +43,20 @@ def qm(request):
                     sheet_all = tSheet.get_all()
                     while len(row_list) < 6:
                         row_list.append('')
-                except:
-                    return render(request, 'qm/fail.html')
+                    result1 = result
+                    while len(result1) < 6:
+                        result1.append('')
+                        
+                except ValueError as exc:
+                    error_context = {'Error_type': 'ValueError', 'Error': exc}
+                    return render(request, 'qm/fail.html', error_context)
+                except Exception as exc:
+                    error_context = {'Error_type': 'Unexpected Error', 'Error': exc}
+                    return render(request, 'qm/fail.html', error_context)
 
             context = {
                     'result': result,
+                    'result1': result1,
                     'sheet': sheet,
                     'action': action,
                     'row': row,

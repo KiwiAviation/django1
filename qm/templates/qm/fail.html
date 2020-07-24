@@ -8,16 +8,16 @@
     <title>Error occured</title>
 </head>
 <body>
-    <h1>An Error Occured</h1>
-    <a class="nav-item nav-link" href="{% url 'qm-qm' %}">Go back</a>
+    <h1>Error</h1>
     <h3>The Following Error occured:</h3>
     <p>{{ Error_type }}: {{ Error }}</p>
-    {% if Error_type == ValueError %}
-        <p>The error was most likely caused by searching for a nonexistent value on the table.</p>
+    {% if Error_type == "ValueError" %}
+        <p>The error was most likely caused by searching for a nonexistent value.</p>
         <p>Check that all values were entered correctly.</p>
     {% else %}
         <p>You've encountered an unexpected error.</p>
     {% endif %}
+    <a class="nav-item" href="{% url 'qm-qm' %}">Go back</a>
 </body>
 </html>
 {% endblock content %}
