@@ -51,12 +51,12 @@
             </div>
             <div class = "attribute hidden">
                 <p><label for="id_Attribute">Attribute:</label> <input class="action" type="text" name="Attribute" 
-                    id="id_Attribute" value="None"></p>
+                    id="id_Attribute" required></p>
                 <p class="text-muted">The attribute to search for or change (id, type, status, patrol, condition, notes)</p>
                 <br>
             </div>
             <div class = "value hidden">
-                <p><label for="id_Value"> New Value:</label> <input class="action" type="text" name="Value" id="id_Value" value="None"></p>
+                <p><label for="id_Value"> New Value:</label> <input class="action" type="text" name="Value" id="id_Value"></p>
                 <p class="text-muted">The new value to insert or change to. If inserting new item seperate attributes with
                     commas.</p>
                 <br>
@@ -81,6 +81,19 @@
                 $('.item').removeClass('hidden');
                 $('.attribute').addClass('hidden');
                 $('.value').removeClass('hidden');
+            }
+        });
+        $('button').click(function() {
+            if ($('#id_Item')[0].value == '') {
+                $('#id_Item')[0].value = 'none';
+            }
+
+            if ($('#id_Attribute')[0].value == '') {
+                $('#id_Attribute')[0].value = 'none';
+            }
+
+            if ($('#id_Value')[0].value == '') {
+                $('#id_Value')[0].value = 'none';
             }
         });
     </script>
