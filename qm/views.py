@@ -67,6 +67,7 @@ def qm(request):
                     'sheet_all': sheet_all
                     }
             return render(request, 'qm/results.html', context)
+        return render (request, 'qm/fail.html')
     else:
         form = spreadForm()
         return render(request, 'qm/spreadsheet.html', {'title': 'Submit', 'form': form})
