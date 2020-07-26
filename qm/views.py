@@ -27,8 +27,9 @@ def qm(request):
                     while len(row_list) < 6:
                         row_list.append('')
                     result1 = result
-                    while len(result1) < 6:
-                        result1.append('')
+                    if isinstance(result1, list):
+                        while len(result1) < 6:
+                            result1.append('')
 
                 except ValueError as exc:
                     error_context = {'Error_type': 'ValueError', 'Error': exc}
@@ -44,8 +45,9 @@ def qm(request):
                     while len(row_list) < 6:
                         row_list.append('')
                     result1 = result
-                    while len(result1) < 6:
-                        result1.append('')
+                    if isinstance(result1, list):
+                        while len(result1) < 6:
+                            result1.append('')
                         
                 except ValueError as exc:
                     error_context = {'Error_type': 'ValueError', 'Error': exc}

@@ -43,10 +43,10 @@
             </ul>
             </p>
             <br>
-            <div class= "item hidden">
+            <div class= "item">
                 <p><label for="id_Item">Item ID:</label> <input class="action" type="text" name="Item" 
                     id="id_Item"></p>
-                <p class="text-muted">Item to search for or change (ta1, ta2, etc.)</p>
+                <p class="text-muted">Item to search for or change (ta1, ta2, etc.). If inserting new item enter the row # of the new item.</p>
                 <br>
             </div>
             <div class = "attribute hidden">
@@ -70,15 +70,12 @@
         $('#id_action input').on('change', function() {
             let selectedAction = $('input[name=action]:checked', '#id_action').val(); 
             if (selectedAction == 'get_row') {
-                $('.item').removeClass('hidden');
                 $('.attribute').addClass('hidden');
                 $('.value').addClass('hidden');
             } else if (selectedAction == 'update_cell') {
-                $('.item').removeClass('hidden');
                 $('.attribute').removeClass('hidden');
                 $('.value').removeClass('hidden');
             } else if (selectedAction == 'insert_row') {
-                $('.item').removeClass('hidden');
                 $('.attribute').addClass('hidden');
                 $('.value').removeClass('hidden');
             }
